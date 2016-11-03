@@ -1,0 +1,15 @@
+READ ME 
+Case Study 1 - Tracie Scott - Doing Data Science - Section 404
+
+Set the working directory for this project in the "housekeeping" text file on the project root directory
+
+The CaseStudy1.Rmd file is located on the root directory and sources all the r code for this project from the appropriate subdirectory and produces html output
+The project root directory also contains the Google Chrome html file
+
+This project downloads two data files from the web containing GDP and Country income data
+Files are stored on the /Data subdirectory
+Also in the /Data are several r code files that tidy, merge, and sort the data. These are sourced by the main .RMD file
+
+The /Analysis subdirectory contains the r code for performing analysis and answering the questions of interest
+
+Set the working directory in the housekeeping file then knit the rmarkdown file to produce output

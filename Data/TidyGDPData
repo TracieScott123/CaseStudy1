@@ -1,0 +1,44 @@
+
+## Finalize the data set for analysis
+# GDPDataTidy - Containing only valid rows of country information as indicted by capital letters in column 1
+#             - convert rankings from a factor to continueous numeric values
+#             - convert GDP value from a factor wtih embedded commas to a continuous numberic value
+#             - Containing only necessary columns 1,2,4,5,6 (other columns are not needed and contain mostly missing values)
+#       Variables will be:
+#       CountryCode - Character - Three letter country code
+#       Ranking     - Numeric   - Rank of GDP, starting with 1
+#                                 Largest GDP has smallest rank number
+#                                 Missing rank means GSP was not available
+#                                 Set missing values for countries to 199 to help seperate country data from rows reporting summary data
+#       CountryGDP  - Character - Name for the geographic area related to GDP provided
+#                                 May not actually be a recognized country
+#       MillionsUSD  - Numveric - Value providing the Gross Domestic Product for the country in equivalient US dollars, in millions
+#                                 Missing values means the data was not available
+#       FootNote    - character value relating that country to notes in the original file
+#
+# Create a temporary table with rows containing three-letter country codes
+ValidRows<-GDPdata[grep("^[A-Z]",GDPdata$X),]
+#
+# Convert coerced factors to numeric data for Ranking and MillionsUSD
+ValidRows$Ranking<-as.numeric(as.character(ValidRows$Gross.domestic.product.2012))
+ValidRows$MillionsUS<-as.numeric(gsub(",", "", ValidRows$X.3))
+#
+# Reduce columns to those likely to use for analysis
+ValidCol <-ValidRows[,c(1,11,4,12,6)]
+#
+# Asign better variable names
+names(ValidCol)<-c("CountryCode", "Ranking", "CountryGDP", "MillionsUSD", "Footnote")
+#
+#
+# Create simple plots to look for obvious issues with the data
+plot(x=ValidCol$CountryCode, y=ValidCol$MillionsUSD)
+plot(x=ValidCol$Ranking, y=ValidCol$MillionsUSD)
+#
+# RAnked data looks reasonable. Evidence of outliers in unranked data, Perhaps as a result of missing datavalues. 
+# Numerica values are required for analysis. Count missing values then remove rows with missing values from final # # # dataset. Recheck plots.
+#
+sum(is.na(ValidCol$Ranking))
+# Note: There are 38 missing values for Ranking.
+sum(is.na(ValidCol$MillionsUSD))
+# Note: There are 24 missing values for GDP value MillionsGDP
+

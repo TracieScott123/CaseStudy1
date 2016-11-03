@@ -1,0 +1,9 @@
+# Create final data frame removing missing numeric values. Perform basic diagnositc on dataset.
+GDPTidy <- na.omit(ValidCol)
+dim(GDPTidy)
+head(GDPTidy)
+str(GDPTidy)
+#
+## Create simple plots to look for obvious issues with the data
+plot(x=GDPTidy$CountryCode, y=GDPTidy$MillionsUSD)
+plot(x=GDPTidy$Ranking, y=GDPTidy$MillionsUSD)

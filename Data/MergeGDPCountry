@@ -1,0 +1,6 @@
+# 
+# Merge datasets on CountryCode in both datasets. How many matches are there?
+MergeCountryGDP <- merge(CountryTidy,GDPTidy)
+
+# Sort the merged dataframe by GDP ascending. Missing values were already removed. 
+SortedCountryGDP <- MergeCountryGDP[order(MergeCountryGDP$MillionsUSD),]

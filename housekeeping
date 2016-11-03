@@ -1,0 +1,15 @@
+# load any packages required
+# Set the working directory
+
+library(repmis)
+library(countrycode)
+library(dplyr)
+library(tidyr)
+library(ggplot2) 
+# Display session info
+sessionInfo()
+#
+# SET WORKING DIRECTORY HERE!!
+setwd("C:/Users/User/Documents/CaseStudy1")
+
+# remember that the working directory gets reset bewteen chunks

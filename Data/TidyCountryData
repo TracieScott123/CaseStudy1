@@ -1,0 +1,22 @@
+# Prepare dateset by 
+#      removing unneeded rows with summary data as indicated by blank or missing IncomeGroup
+#      remove uneeded columns (this dataset has a large number of columns not used by this research effort)
+#      Seperate IncomeGroupOCED into new IncomeGroup and OCEDStatus so values can be used in analysis
+#
+# CountryTidy variables will be:
+#      CountryCode - Character - Three letter country code (used to merge data with GDP information)
+#      ShortName   - Character - Informal abbreviated or shortened name for the country, may be helpful with charts
+#      IncomeGroup - Character - Indicates relative level of income, inclucding OCED status (OCED or nonOCED)
+#      LongName    - Character - Formal Full name for the country
+#      Region      - Character - Region name (may not be  used, but could be handy, so retained)
+# Note: Other variables will be excluded; not relevant to this  research
+#
+# Create a temporary table eliminating rows containing summary data (Income.Group is missing)
+ValidRows<-CountryData[!is.na(CountryData$Income.Group),]
+# Reduce columns to those likely to use for analysis
+CountryTidy <-ValidRows[,c(1,31,3,2,4)]
+# Asign better variable names
+names(CountryTidy)<-c("CountryCode", "ShortName", "IncomeGroup", "LongName", "Region")
+dim(CountryTidy)
+head(CountryTidy)
+str(CountryTidy)

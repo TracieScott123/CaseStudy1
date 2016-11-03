@@ -1,0 +1,11 @@
+
+# Download data set containg country information from https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv
+# read downloaded .CSV file and assign to CountryData, including the file header row
+URLCountry <-"https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
+download.file(URLCountry,destfile=".//Country.csv")
+CountryData<-read.csv("Country.csv",header=TRUE,na.strings=c(""," "))
+# Explore GDPdata structure and content
+dim(CountryData)
+names(CountryData)
+# head(CountryData)
+# str(CountryData)
