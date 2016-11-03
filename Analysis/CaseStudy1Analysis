@@ -1,0 +1,22 @@
+#Analysis
+# all files are on the data directory
+setwd("..")
+setwd("Data")
+dim(MergeCountryGDP)
+# Answer A- There were 210 rows matched by countrycode from both dataframes merged into the new dataframe
+#
+SortedCountryGDP[13,]
+# Answer B- The 13th country is Azerbajan AZE
+#
+# What is the average ranking for High Income: OECD  and High:Income: non-OECD countries?
+tapply(SortedCountryGDP$Ranking,SortedCountryGDP$IncomeGroup,mean,na.rm=TRUE)
+#Answer c - nonOECD = 132.4; OCED 33.0 (OCED - Economic Co-operation and Development)
+#
+# Answer D - plot CountryCode by Country GDP in Millions, color by Income Group
+ggplot(SortedCountryGDP, aes(y=SortedCountryGDP$MillionsUSD, x=SortedCountryGDP$CountryCode, color=SortedCountryGDP$IncomeGroup )) + geom_point()
+#
+#Add a variable for quartile
+SortedCountryGDP$quartile <- ntile(SortedCountryGDP$MillionsUSD, 5) 
+#create a Table representing the Quartiles by MillionsUSD and IncomeGroup
+table(SortedCountryGDP$quartile, SortedCountryGDP$IncomeGroup)
+# Answer E - There are three (3) countries in Lower middle income but among the 38 nations with highest GDP
